@@ -1,3 +1,4 @@
+const { application } = require("express");
 const express = require("express"); 
 const router = express.Router(); 
 
@@ -91,5 +92,24 @@ router.put("/:id", (req, res, next) => {
         }
     );
 });
+
+router.delete("/delete/:id", (req, res, next) => 
+{
+    primarydata.findOneAndRemove
+        ({ _id: req.params.id}, 
+        (error, data) => {
+            if (error) 
+            {
+                return next(error);
+            } else 
+            {
+                res.status(200).json
+                ({
+                    client_deleted: data
+                })
+            }
+    });
+});
+
 
 module.exports = router;
