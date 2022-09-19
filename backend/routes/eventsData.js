@@ -124,4 +124,24 @@ router.put("/addAttendee/:id", (req, res, next) => {
     
 });
 
+
+router.delete("/delete/:id", (req, res, next) => 
+{
+    eventdata.findOneAndRemove
+        ({ _id: req.params.id}, 
+        (error, data) => {
+            if (error) 
+            {
+                return next(error);
+            } else 
+            {
+                res.status(200).json
+                ({
+                    event_deleted: data
+                })
+            }
+    });
+});
+
+
 module.exports = router;
