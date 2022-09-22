@@ -45,7 +45,7 @@ let primaryDataSchema = new Schema({
     organizationData_id: 
     {
         type: String,
-        required: true
+        //required: true
      }
 },
     {
@@ -93,7 +93,7 @@ let eventDataSchema = new Schema({
     organizationData_id: 
     {
         type: String,
-        required: true
+        //required: true
      }
 }, {
     collection: 'eventData'

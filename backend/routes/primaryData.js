@@ -103,10 +103,10 @@ router.delete("/delete/:id", (req, res, next) =>
                 return next(error);
             } else 
             {
-                res.status(200).json
-                ({
-                    client_deleted: data
-                })
+                //res.status(200).json
+                //({
+                    //client_deleted: data
+                //})
             }
     });
 });
