@@ -134,9 +134,8 @@ router.put("/deleteAttendee/:id", (req, res, next) => {
             if (error) {
                 return next(error);
             } else {
-                //if (data.length == 0) 
-                //{
-                    eventdata.updateOne(
+                    eventdata.updateOne
+                    (
                         { _id: req.params.id }, 
                         { $pull: { attendees: req.body.attendee } },
                         (error, data) => {
@@ -148,8 +147,6 @@ router.put("/deleteAttendee/:id", (req, res, next) => {
                             }
                         }
                     );
-                //}
-                
             }
         }
     );
