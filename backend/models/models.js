@@ -40,7 +40,8 @@ let primaryDataSchema = new Schema({
         },
         zip: {
             type: String,
-        }
+        },
+        _id : false
     }],
     organizationData_id: 
     {

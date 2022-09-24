@@ -29,13 +29,13 @@ export default {
             secondaryPhone: "",
           },
         ],
-        address: {
+        address: [{
           line1: "",
           line2: "",
           city: "",
           county: "",
           zip: "",
-        },
+        }],
       },
       // list of events shown in table
       clientEvents: [],
@@ -60,11 +60,11 @@ export default {
           data.phoneNumbers[0].primaryPhone;
         this.client.phoneNumbers[0].secondaryPhone =
           data.phoneNumbers[0].secondaryPhone;
-        this.client.address.line1 = data.address.line1;
-        this.client.address.line2 = data.address.line2;
-        this.client.address.city = data.address.city;
-        this.client.address.county = data.address.county;
-        this.client.address.zip = data.address.zip;
+        this.client.address[0].line1 = data.address[0].line1;
+        this.client.address[0].line2 = data.address[0].line2;
+        this.client.address[0].city = data.address[0].city;
+        this.client.address[0].county = data.address[0].county;
+        this.client.address[0].zip = data.address[0].zip;
       });
     axios
       .get(
@@ -270,7 +270,7 @@ export default {
               <input
                 type="text"
                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="client.address.line1"
+                v-model="client.address[0].line1"
               />
             </label>
           </div>
@@ -281,7 +281,7 @@ export default {
               <input
                 type="text"
                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="client.address.line2"
+                v-model="client.address[0].line2"
               />
             </label>
           </div>
@@ -293,7 +293,7 @@ export default {
               <input
                 type="text"
                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="client.address.city"
+                v-model="client.address[0].city"
               />
             </label>
           </div>
@@ -305,7 +305,7 @@ export default {
               <input
                 type="text"
                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="client.address.county"
+                v-model="client.address[0].county"
               />
             </label>
           </div>
@@ -316,7 +316,7 @@ export default {
               <input
                 type="text"
                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                v-model="client.address.zip"
+                v-model="client.address[0].zip"
               />
             </label>
           </div>

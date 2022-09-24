@@ -13,15 +13,26 @@ app.use(cors({
   origin: '*'
 }));
 
+
+const connectionstring = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@${process.env.DB_HOST}`
+
+console.log(connectionstring)
+
 //sets up mongoose for the mongoDB connection
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(connectionstring)
   .then(() => {
     console.log("Database connection Success!");
   })
   .catch((err) => {
     console.error("Mongo Connection Error", err);
   });
+
+
+console.log(process.env.organization)
+
+//const ORG = process.env.organization; 
+
 
 //declare port number for the api
 const PORT = process.env.PORT || 3000;

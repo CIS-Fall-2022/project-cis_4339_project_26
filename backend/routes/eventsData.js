@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const org = process.env.ORGANIZATION;
 
 //importing data model schemas
 let { eventdata } = require("../models/models"); 
@@ -123,6 +124,28 @@ router.put("/addAttendee/:id", (req, res, next) => {
     );
     
 });
+
+
+router.put("/deleteattendee/:attendee", (req, res, next) =>
+
+{
+    let attendee_id = req.params.attendee
+    eventdata.updateMany({},
+        {$pull: {attendees: attendee_id}}
+    ),
+    (error, data) => {
+        if (error)
+        {
+            console.log(error)
+            return next(error);
+        } else
+        {
+            res.status(200).json
+            ({
+                client_deleted: data
+            })
+        }
+}});
 
 
 //PUT delete attendee from event

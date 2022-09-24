@@ -87,7 +87,7 @@
             <tr @click="editClient(client._id)" v-for="client in queryData" :key="client._id">
               <td class="p-2 text-left">{{ client.firstName + " " + client.lastName }}</td>
               <td class="p-2 text-left">{{ client.phoneNumbers[0].primaryPhone }}</td>
-              <td class="p-2 text-left">{{ client.address.city }}</td>
+              <td class="p-2 text-left">{{ client.address[0].city }}</td>
             </tr>
           </tbody>
         </table>

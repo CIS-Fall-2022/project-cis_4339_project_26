@@ -1,6 +1,7 @@
 const { application } = require("express");
 const express = require("express"); 
 const router = express.Router(); 
+const org = process.env.ORGANIZATION;
 
 //importing data model schemas
 let { primarydata } = require("../models/models"); 
@@ -8,8 +9,9 @@ let { eventdata } = require("../models/models");
 
 //GET all entries
 router.get("/", (req, res, next) => { 
-    primarydata.find( 
-        (error, data) => {
+    primarydata.find( { organizationData_id : org },
+        (error, data) => { 
+            console.log(data.address)
             if (error) {
                 return next(error);
             } else {
@@ -63,8 +65,10 @@ router.get("/events/:id", (req, res, next) => {
 
 //POST
 router.post("/", (req, res, next) => { 
+    req.body.organizationData_id = org
+    console.log(req.body)
     primarydata.create( 
-        req.body,
+        req.body, 
         (error, data) => { 
             if (error) {
                 return next(error);
@@ -103,10 +107,7 @@ router.delete("/delete/:id", (req, res, next) =>
                 return next(error);
             } else 
             {
-                //res.status(200).json
-                //({
-                    //client_deleted: data
-                //})
+               
             }
     });
 });
