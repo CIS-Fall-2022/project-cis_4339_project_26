@@ -97,8 +97,10 @@ router.put("/:id", (req, res, next) => {
     );
 });
 
+//https://www.mongodb.com/community/forums/t/how-to-delete-a-specific-nested-subdocument-completely-from-an-document/100219
 router.delete("/delete/:id", (req, res, next) => 
 {
+    console.log("test")
     primarydata.findOneAndRemove
         ({ _id: req.params.id}, 
         (error, data) => {
@@ -107,10 +109,45 @@ router.delete("/delete/:id", (req, res, next) =>
                 return next(error);
             } else 
             {
-               
+               eventdata.updateMany              
+               ({ organizationData_id : org },
+               {
+                "$pull": {"attendees": req.params.id}
+               }, 
+               (error2, data2) =>{
+                if(error2)
+                    {
+                        return next(error2);
+                    } else
+                    {
+                        res.json(data2)
+                    }
+               })
+
             }
     });
 });
 
+router.get("/joins/:id", (req, res, next) =>
+    { 
+        primarydata.aggregate([
+            {$match: { _id: req.params.id} },
+            {$project: {_id: 1, firstName: 1, lastName: 1, city: 1} },
+            {$lookup: {
+                from: 'eventData',
+                localField: 'attendees',
+                foreignField: '_id',
+                as: 'Event Data'
+            } },
+           // {$unwind: '$eventdata'},
+            
+        ], (error, data) => {
+            if (error) {
+                return next(error)
+            } else {
+                res.json(data);
+            }
+        });
 
+    });
 module.exports = router;

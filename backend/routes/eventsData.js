@@ -68,6 +68,8 @@ router.get("/client/:id", (req, res, next) => {
 
 //POST
 router.post("/", (req, res, next) => { 
+    req.body.organizationData_id = org 
+    console.log(req.body)
     eventdata.create( 
         req.body, 
         (error, data) => { 
