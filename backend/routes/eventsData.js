@@ -178,12 +178,12 @@ router.delete("/delete/:id", (req, res, next) =>
 });
 
 
-router.put("/deleteattendee/:attendee", (req, res, next) =>
+router.put("/deleteattendee/:id", (req, res, next) =>
 
 {
-    let attendee_id = req.params.attendee
+
     eventdata.updateMany({},
-        {$pull: {attendees: attendee_id}}
+        {$pull: {attendees: req.params.id}}
     ),
     (error, data) => {
         if (error)
@@ -194,9 +194,44 @@ router.put("/deleteattendee/:attendee", (req, res, next) =>
         {
             res.status(200).json
             ({
-                client_deleted: data
+                //client_deleted: data
             })
         }
 }});
+
+
+//Remove attendee from ALL scheduled events without deleting personal data 
+router.put("/removeAttendee/:attendee", (req, res, next) => {
+        eventdata.updateMany(
+            {}, 
+            { $pull: { attendees: req.params.attendee } },
+                (error, data) => {
+                    if (error) {
+                        consol
+                         return next(error);
+                    } else {
+                        res.json(data);
+                    }
+                }
+            );
+        }
+    );   
+
+
+/* router.get("/lasttwomonths", (req, res, next) => { 
+    let today = new Date();
+    let day_count = new Date() - 120; 
+    eventdata.find(
+        {date:{ $lte: today, $gt: day_count}}, 
+        (error, data) => {
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data);
+            }
+        }
+    );
+}); */
+
 
 module.exports = router;
