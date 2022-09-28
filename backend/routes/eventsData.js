@@ -232,11 +232,14 @@ router.put("/removeAttendee/:event/:attendee", (req, res, next) => {
     );
 }); */
 
+
+// Aggregate request to determine the number of attendees for each event within the past 2 months. 
+// https://www.mongodb.com/docs/manual/reference/operator/aggregation/size/
 router.get("/getbydate", (req, res, next) =>{
     eventdata.aggregate([{
         $match: {$expr: {$gt: ["$date", {$dateSubtract: {startDate: "$$NOW", unit: "month", amount: 2}}]}}
 }, 
-    {$project: {_id: 0, eventName:1, date: 1 }}
+    {$project: {_id: 0, eventName:1, date: 1, attendees: { $size: "$attendees" }}}
 ], (error, data) => {
     if (error) {
       return next(error)
