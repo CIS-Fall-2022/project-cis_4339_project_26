@@ -200,10 +200,9 @@ router.put("/deleteattendee/:id", (req, res, next) =>
 }});
 
 
-//Remove attendee from ALL scheduled events without deleting personal data 
-router.put("/removeAttendee/:attendee", (req, res, next) => {
-        eventdata.updateMany(
-            {}, 
+//Remove attendee from specific event.
+router.put("/removeAttendee/:event/:attendee", (req, res, next) => {
+        eventdata.findByIdAndUpdate(req.params.event,
             { $pull: { attendees: req.params.attendee } },
                 (error, data) => {
                     if (error) {
