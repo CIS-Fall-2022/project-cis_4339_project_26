@@ -233,5 +233,18 @@ router.put("/removeAttendee/:attendee", (req, res, next) => {
     );
 }); */
 
+router.get("/getbydate", (req, res, next) =>{
+    eventdata.aggregate([{
+        $match: {$expr: {$gt: ["$date", {$dateSubtract: {startDate: "$$NOW", unit: "month", amount: 2}}]}}
+}, 
+    {$project: {_id: 0, eventName:1, date: 1 }}
+], (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data);
+    }
+})
+})
 
 module.exports = router;
