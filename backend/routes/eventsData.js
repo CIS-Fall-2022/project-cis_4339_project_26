@@ -129,6 +129,10 @@ router.put("/addAttendee/:id", (req, res, next) => {
 
 
 
+
+
+
+
 //DELETE Event API
 router.delete("/delete/:id", (req, res, next) => 
 {
