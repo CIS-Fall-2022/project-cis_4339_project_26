@@ -131,33 +131,6 @@ router.put("/addAttendee/:id", (req, res, next) => {
 
 
 
-//PUT delete attendee from event
-router.put("/deleteAttendee/:id", (req, res, next) => {
-    //deletes attendee from list
-    eventdata.find( 
-        { _id: req.params.id}, 
-        (error, data) => { 
-            if (error) {
-                return next(error);
-            } else {
-                    eventdata.updateOne
-                    (
-                        { _id: req.params.id }, 
-                        { $pull: { attendees: req.body.attendee } },
-                        (error, data) => {
-                            if (error) {
-                                consol
-                                return next(error);
-                            } else {
-                                res.json(data);
-                            }
-                        }
-                    );
-            }
-        }
-    );
-    
-});
 
 
 //DELETE Event API
