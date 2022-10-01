@@ -128,27 +128,5 @@ router.delete("/delete/:id", (req, res, next) =>
     });
 });
 
-router.get("/joins/:id", (req, res, next) =>
-    { 
-        primarydata.aggregate([
-            {$match: { _id: req.params.id} },
-            {$project: {_id: 1, firstName: 1, lastName: 1, city: 1, attendees: 1, eventName:1} },
-            {$lookup: {
-                from: 'eventData',
-                localField: 'attendees',
-                foreignField: '_id',
-                as: 'Event Data'
-            } },
-        
-            //{$unwind: '$eventdata'},
-            
-        ], (error, data) => {
-            if (error) {
-                return next(error)
-            } else {
-                res.json(data);
-            }
-        });
-    });
 
 module.exports = router;

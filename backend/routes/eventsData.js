@@ -159,6 +159,8 @@ router.put("/deleteAttendee/:id", (req, res, next) => {
     
 });
 
+
+//DELETE Event API
 router.delete("/delete/:id", (req, res, next) => 
 {
     eventdata.findOneAndRemove
@@ -177,60 +179,6 @@ router.delete("/delete/:id", (req, res, next) =>
     });
 });
 
-
-router.put("/deleteattendee/:id", (req, res, next) =>
-
-{
-
-    eventdata.updateMany({},
-        {$pull: {attendees: req.params.id}}
-    ),
-    (error, data) => {
-        if (error)
-        {
-            console.log(error)
-            return next(error);
-        } else
-        {
-            res.status(200).json
-            ({
-                //client_deleted: data
-            })
-        }
-}});
-
-
-//Remove attendee from specific event.
-router.put("/removeAttendee/:event/:attendee", (req, res, next) => {
-        eventdata.findByIdAndUpdate(req.params.event,
-            { $pull: { attendees: req.params.attendee } },
-                (error, data) => {
-                    if (error) {
-                        consol
-                         return next(error);
-                    } else {
-                        res.json(data);
-                    }
-                }
-            );
-        }
-    );   
-
-
-/* router.get("/lasttwomonths", (req, res, next) => { 
-    let today = new Date();
-    let day_count = new Date() - 120; 
-    eventdata.find(
-        {date:{ $lte: today, $gt: day_count}}, 
-        (error, data) => {
-            if (error) {
-                return next(error);
-            } else {
-                res.json(data);
-            }
-        }
-    );
-}); */
 
 // Aggregate to gather number of attendees for all events in the past 2 months. 
 // The $size operator allows the pipeline to display a count of attendees rather than listing them out. 
