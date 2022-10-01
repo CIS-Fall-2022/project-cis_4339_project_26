@@ -37,17 +37,19 @@ router.get("/id/:id", (req, res, next) => {
 
 //GET entries based on search query
 //Ex: '...?firstName=Bob&lastName=&searchBy=name' 
+//how to get it to filter out by org id
 router.get("/search/", (req, res, next) => { 
     let dbQuery = "";
     if (req.query["searchBy"] === 'name') {
-        dbQuery = { firstName: { $regex: `^${req.query["firstName"]}`, $options: "i" }, lastName: { $regex: `^${req.query["lastName"]}`, $options: "i" } }
+        dbQuery = { firstName: { $regex: `^${req.query["firstName"]}`, $options: "i" }, lastName: { $regex: `^${req.query["lastName"]}`, $options: "i" }}
+
     } else if (req.query["searchBy"] === 'number') {
         dbQuery = {
             "phoneNumbers.primaryPhone": { $regex: `^${req.query["phoneNumbers.primaryPhone"]}`, $options: "i" }
         }
     };
     primarydata.find( 
-        dbQuery, 
+        dbQuery,
         (error, data) => { 
             if (error) {
                 return next(error);
@@ -60,7 +62,52 @@ router.get("/search/", (req, res, next) => {
 
 //GET events for a single client
 router.get("/events/:id", (req, res, next) => { 
-    
+    primarydata.aggregate([
+        {$match: {id: req.params.id}},
+        {$project: {firstName: 1, lastName: 1}},
+        {$lookup:
+        {from : "eventsData",
+        localfield: "id",
+        foreignField: "primaryData_id",
+        as: "Events"    
+        }},
+        {$unwind: "$attendees"}
+    ]), (error, data) => { 
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data); 
+        }
+    }
+});
+
+router.get("/event/:id", (req, res, next) => { 
+    primarydata.aggregate([
+        {$match: {id: req.params.id}},
+        {$lookup: {
+            from: "eventsData",
+            let: { attendees: "$attendees"},
+            pipeline: [{
+                $match: {
+                    $expr: {
+                        $and: [{ $eq: ["$attendees", "$_id"]}]
+                    }
+                }
+            }],
+            as: "Events"
+        }
+         
+        }
+        
+    ], (error, data) => { 
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data); 
+        }
+    }
+);
+
 });
 
 //POST
@@ -127,6 +174,7 @@ router.delete("/delete/:id", (req, res, next) =>
             }
     });
 });
+
 
 
 module.exports = router;
