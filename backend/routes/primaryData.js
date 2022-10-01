@@ -61,52 +61,7 @@ router.get("/search/", (req, res, next) => {
 
 //GET events for a single client
 router.get("/events/:id", (req, res, next) => { 
-    primarydata.aggregate([
-        {$match: {id: req.params.id}},
-        {$project: {firstName: 1, lastName: 1}},
-        {$lookup:
-        {from : "eventsData",
-        localfield: "id",
-        foreignField: "primaryData_id",
-        as: "Events"    
-        }},
-        {$unwind: "$attendees"}
-    ]), (error, data) => { 
-        if (error) {
-            return next(error);
-        } else {
-            res.json(data); 
-        }
-    }
-});
-
-router.get("/event/:id", (req, res, next) => { 
-    primarydata.aggregate([
-        {$match: {id: req.params.id}},
-        {$lookup: {
-            from: "eventsData",
-            let: { attendees: "$attendees"},
-            pipeline: [{
-                $match: {
-                    $expr: {
-                        $and: [{ $eq: ["$attendees", "$_id"]}]
-                    }
-                }
-            }],
-            as: "Events"
-        }
-         
-        }
-        
-    ], (error, data) => { 
-        if (error) {
-            return next(error);
-        } else {
-            res.json(data); 
-        }
-    }
-);
-
+    
 });
 
 //POST

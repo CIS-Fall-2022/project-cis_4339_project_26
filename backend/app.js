@@ -13,14 +13,9 @@ app.use(cors({
   origin: '*'
 }));
 
-
-const connectionstring = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@${process.env.DB_HOST}`
-
-console.log(connectionstring)
-
 //sets up mongoose for the mongoDB connection
 mongoose
-  .connect(connectionstring)
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Database connection Success!");
   })
