@@ -1,10 +1,10 @@
 const express = require("express");
-const { ObjectId } = require("mongodb");
 const router = express.Router();
 const org = process.env.ORGANIZATION;
-const mongoose = require("mongoose");
 
+//access nodemodule to process ObjectID in organization data. 
 var  ObjectID = require('mongodb').ObjectId;
+
 //importing data model schemas
 let { organizationdata } = require("../models/models"); 
 let { eventdata } = require("../models/models"); 
