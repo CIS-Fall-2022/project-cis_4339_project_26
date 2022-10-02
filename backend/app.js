@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan"); //better debugging
 const cors = require("cors");
+const router = express.Router();
+const org = process.env.ORGANIZATION;
 //allow using a .env file
 require("dotenv").config();   
 
@@ -39,10 +41,12 @@ app.use(morgan("dev"));
 //import routes
 const primaryDataRoute  = require('./routes/primaryData');
 const eventsDataRoute  = require('./routes/eventsData');
+const dashboardRoute  = require('./routes/dashboard');
 
 //setup middle ware for routes
 app.use('/primaryData', primaryDataRoute);
-app.use('/eventData', eventsDataRoute)
+app.use('/eventData', eventsDataRoute);
+app.use('/dashboard', dashboardRoute);
 
 app.listen(PORT, () => {
   console.log("Server started listening on port : ", PORT);
@@ -56,3 +60,4 @@ app.use(function (err, req, res, next) {
     err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+

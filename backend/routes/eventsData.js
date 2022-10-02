@@ -153,20 +153,4 @@ router.delete("/delete/:id", (req, res, next) =>
 });
 
 
-// Aggregate to gather number of attendees for all events in the past 2 months. 
-// The $size operator allows the pipeline to display a count of attendees rather than listing them out. 
-router.get("/getbydate", (req, res, next) =>{
-    eventdata.aggregate([{
-        $match: {$expr: {$gt: ["$date", {$dateSubtract: {startDate: "$$NOW", unit: "month", amount: 2}}]}}
-}, 
-    {$project: {_id: 0, eventName:1, date: 1, attendees: {$size: "$attendees"}}}
-], (error, data) => {
-    if (error) {
-      return next(error)
-    } else {
-      res.json(data);
-    }
-})
-})
-
 module.exports = router;
