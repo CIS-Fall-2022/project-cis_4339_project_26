@@ -8,7 +8,9 @@ npm install
 ```
 
 ### Before startup 
-Setup a .env file with the following variables, e.g.:
+Setup a .env file with the following variables listed below.
+The organization variable listed is what was used during the Postman endpoint testing. 
+Please use it if necessary to test out endpoints.
 
 ```
 MONGO_URL = mongodb+srv://Admin:CIS4339@atlascluster.nftbill.mongodb.net/GlobalPlatform
