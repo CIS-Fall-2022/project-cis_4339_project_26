@@ -66,7 +66,7 @@ router.get("/client/:id", (req, res, next) => {
     );
 });
 
-//POST
+//POST create new event
 router.post("/", (req, res, next) => { 
     req.body.organizationData_id = org 
     console.log(req.body)
@@ -82,7 +82,7 @@ router.post("/", (req, res, next) => {
     );
 });
 
-//PUT
+//PUT update an event by ID
 router.put("/:id", (req, res, next) => {
     eventdata.findOneAndUpdate(
         { _id: req.params.id },
@@ -129,11 +129,9 @@ router.put("/addAttendee/:id", (req, res, next) => {
 
 
 
-
-
-
-
-//DELETE Event API
+//HARD DELETE Event from collection
+//https://www.mongodb.com/docs/manual/reference/method/db.collection.findOneAndDelete/
+//https://www.mongodb.com/docs/manual/reference/operator/update/pull/
 router.delete("/delete/:id", (req, res, next) => 
 {
     eventdata.findOneAndRemove

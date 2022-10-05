@@ -59,10 +59,6 @@ router.get("/search/", (req, res, next) => {
     );
 });
 
-//GET events for a single client
-router.get("/events/:id", (req, res, next) => { 
-    
-});
 
 //POST
 router.post("/", (req, res, next) => { 
@@ -98,7 +94,9 @@ router.put("/:id", (req, res, next) => {
     );
 });
 
+//HARD DELETE a client from primaryData and their IDs from the attendees array in the eventsData collection
 //https://www.mongodb.com/community/forums/t/how-to-delete-a-specific-nested-subdocument-completely-from-an-document/100219
+//https://www.geeksforgeeks.org/mongoose-findoneandremove-function/
 router.delete("/delete/:id", (req, res, next) => 
 {
     console.log("test")
