@@ -4,7 +4,9 @@ This implementation is for NodeJS based on [Express](https://expressjs.com/) and
 
 ## MongoDB Setup
 ```
-This implementation utilized MongoDB Atlas for cloud access to the database. The Mongo URL listed below in the "Before Startup" section is the connection string needed to connect to the Atlas cloud. Please reach out to either Trang Tran or Aaron Oviedo if there any concerns with the cloud access. 
+This implementation utilized MongoDB Atlas for cloud access to the database. 
+The Mongo URL listed below in the "Before Startup" section is the connection string needed to connect to the Atlas cloud. 
+Please reach out to either Trang Tran or Aaron Oviedo if there any concerns with the cloud access. 
 ```
 
 ## Project setup
