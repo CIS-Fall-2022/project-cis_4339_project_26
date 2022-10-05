@@ -24,6 +24,6 @@ npm start
 ```
 ### API Documentation
 Documentation of the API endpoints can be found at the link below.
-'''
+```
 https://documenter.getpostman.com/view/17726846/2s83zcU7s2
-'''
+```
