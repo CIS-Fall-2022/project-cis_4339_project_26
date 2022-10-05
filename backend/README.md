@@ -28,6 +28,8 @@ ORGANIZATION = 6335d676e3c2212588e70a32
 ### Compiles and hot-reloads for development
 ```
 npm start
+or
+nodemon start
 ```
 ### API Documentation
 Documentation of the API endpoints can be found at the link below.
