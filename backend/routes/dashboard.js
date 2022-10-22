@@ -17,7 +17,7 @@ let { eventdata } = require("../models/models");
 //https://www.mongodb.com/docs/manual/reference/operator/query/size/
 router.get("/getbydate", (req, res, next) =>{
     eventdata.aggregate([{
-        $match: {$expr: {$gt: ["$date", {$dateSubtract: {startDate: "$$NOW", unit: "month", amount: 2}}]}}
+        $match: {$and: [{$expr: {$gt: ["$date", {$dateSubtract: {startDate: "$$NOW", unit: "month", amount: 2}}]}}, {organizationData_id : org }]}
   }, 
     {$project: {_id: 0, eventName:1, date: 1, attendees: {$size: "$attendees"}}}
   ], (error, data) => {
