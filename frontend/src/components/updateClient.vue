@@ -334,14 +334,12 @@ export default {
 
         <!-- grid container -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-10">
-          <div class="flex justify-between mt-10 mr-20">
+          <div class="mt-10 mr-20">
             <button
               @click="handleClientUpdate"
               type="submit"
-              class="bg-red-700 text-white rounded"
+              class="bg-red-700 text-white rounded mr-3"
             >Update Client</button>
-          </div>
-          <div class="flex justify-between mt-10 mr-20">
             <button
               @click="handleClientDelete"
               type="submit"
