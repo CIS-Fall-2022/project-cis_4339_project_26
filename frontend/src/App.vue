@@ -48,7 +48,7 @@
           background: linear-gradient(250deg, #C8102E 70%, #efecec 50.6%);
         "
       >
-        <h1 class="mr-20 text-3xl text-white">Dataplatform</h1>
+        <h1 class="mr-20 text-3xl text-white" id="App">{{organization}}</h1>
       </section>
       <div>
         <router-view></router-view>
@@ -57,9 +57,22 @@
   </main>
 </template>
 
+<!-- resp.data[0] is fixed with the first organization inside the database. (Future Bug) -->
 <script>
+import axios from "axios";
 export default {
   name: "App",
+  data() {
+    return {
+      organization: "",
+    }
+  },
+  mounted() {
+    let apiURL = import.meta.env.VITE_ROOT_API + `/dashboard/displayname/`;
+    axios.get(apiURL).then((resp) => {
+      this.organization = resp.data[0].organizationName;
+    });
+  },
 };
 </script>
 
