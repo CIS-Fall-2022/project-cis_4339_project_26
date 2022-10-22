@@ -188,28 +188,34 @@
         </div>
 
         <!-- grid container -->
+        
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
           <div class="mt-10 mr-20">
             <button
               @click="handleEventUpdate"
               type="submit"
-              class="bg-red-700 text-white rounded mr-3"
-            >Update Event</button>
-            <button
+               class="bg-red-700 text-white rounded mr-3"
+             >Update Event</button>
+             <button
               @click="handleEventDelete"
               type="submit"
               class="bg-red-700 text-white rounded"
-            >Delete Event</button>
-          </div>
-          </div>
-        </div>
-          <div class="flex justify-between mt-10 mr-20">
-            <button
+             >Delete Event</button>
+         </div>
+
+         <div class="flex justify-between mt-10 mr-20">
+          <button
               type="reset"
               class="border border-red-700 bg-white text-red-700 rounded"
-              @click="$router.go(-1)"
+             @click="$router.go(-1)"
             >Go back</button>
           </div>
+       </div>
+
+
+
+
+        
       
         
 
@@ -247,7 +253,7 @@
           </div>
         </div>
       </form>
-    </div>
+      </div>
   </main>
 </template>
 <script>
