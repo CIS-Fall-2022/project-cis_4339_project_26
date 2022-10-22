@@ -189,11 +189,11 @@
 
         <!-- grid container -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
-          <div class="flex justify-left between mt-10 and mr-20">
+          <div class="mt-10 mr-20">
             <button
               @click="handleEventUpdate"
               type="submit"
-              class="bg-red-700 text-white rounded"
+              class="bg-red-700 text-white rounded mr-3"
             >Update Event</button>
             <button
               @click=""
@@ -201,8 +201,7 @@
               class="bg-red-700 text-white rounded"
             >Delete Event</button>
           </div>
-          </div>
-        </div>
+
           <div class="flex justify-between mt-10 mr-20">
             <button
               type="reset"
