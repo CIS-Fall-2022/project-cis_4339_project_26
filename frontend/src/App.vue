@@ -57,7 +57,6 @@
   </main>
 </template>
 
-<!-- resp.data[0] is fixed with the first organization inside the database. (Future Bug) -->
 <script>
 import axios from "axios";
 export default {
