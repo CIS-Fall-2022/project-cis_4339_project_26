@@ -210,9 +210,7 @@
               @click="$router.go(-1)"
             >Go back</button>
           </div>
-        </div>
-      </div>
-
+      
         
 
         <hr class="mt-10 mb-10" />
