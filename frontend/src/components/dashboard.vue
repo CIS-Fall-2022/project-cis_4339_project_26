@@ -16,7 +16,7 @@
           <tbody class="divide-y divide-gray-300">
             <tr v-for="event in eventData" :key="event._id">
               <td class="p-2 text-left">{{ event.eventName }}</td>
-              <td class="p-2 text-left">{{ event.date }}</td>
+              <td class="p-2 text-left">{{ formattedDate(event.date) }}</td>
               <td class="p-2 text-left">{{ event.attendees }}</td>
             </tr>
           </tbody>
@@ -26,6 +26,7 @@
   </main>
 </template>
 <script>
+import { DateTime } from "luxon";
 import axios from "axios";
 export default {
   data() {
@@ -38,6 +39,11 @@ export default {
     axios.get(apiURL).then((resp) => {
       this.eventData = resp.data;
     });
-  }
+  },
+  methods: {
+    formattedDate(datetimeDB) {
+      return DateTime.fromISO(datetimeDB).plus({ days: 1 }).toLocaleString();
+    },
+  },
 };
 </script>
