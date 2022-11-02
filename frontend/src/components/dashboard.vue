@@ -4,14 +4,17 @@
     <div>
       <h1 class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10">Welcome</h1>
     </div>
+    <div>
+    <h1 class ="font-bold text-2xl text-red-700 text-center mt-8 tracking-wider">Attendee Count From the Last Two Months</h1>
+    </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-6 gap-y-10">
       <div class="flex flex-col col-span-2">
         <table class="min-w-full shadow-md rounded">
           <thead class="headerTitle bg-red-50 text-xl">
             <tr>
-              <th class="p-4 text-left">Event Name</th>
-              <th class="p-4 text-left">Event Date</th>
-              <th class="p-4 text-left">Number Of Attendees</th>
+              <th class="p-4 text-left text-red-700">Event Name</th>
+              <th class="p-4 text-left text-red-700">Event Date</th>
+              <th class="p-4 text-left text-red-700">Number Of Attendees</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-300">
@@ -62,7 +65,7 @@ export default {
     },
     width: {
       type: Number,
-      default: 400
+      default: 150
     },
     height: {
       type: Number,
@@ -86,10 +89,12 @@ export default {
       eventData: [],
       chartData: {
         labels: [],
-        datasets: [ { label: ['Number Of Attendees'], data: [] } ]
+        datasets: [ { label: ['Number Of Attendees'], data: [], backgroundColor: '#ce2843' } ]
       },
+      
       chartOptions: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: false
       }
     }
   },
