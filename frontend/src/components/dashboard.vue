@@ -1,4 +1,4 @@
-
+<!-- chart documentation: https://vue-chartjs.org/guide/#creating-your-first-chart -->
 <template>
   <main>
     <div>
@@ -24,62 +24,88 @@
         </table>
       </div>
     </div>
-
-<canvas ref="myChart" width="900px" height="250px"></canvas>
-
   </main>
+
+  <Bar
+    :chart-options="chartOptions"
+    :chart-data="chartData"
+    :chart-id="chartId"
+    :dataset-id-key="datasetIdKey"
+    :plugins="plugins"
+    :css-classes="cssClasses"
+    :styles="styles"
+    :width="width"
+    :height="height"
+  />
+
 </template>
+
 <script>
 import { DateTime } from "luxon";
-import Chart from 'chart.js';
 import axios from "axios";
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
-  name: 'Chart',
+  components: { Bar },
   props: {
-    label: {
-      type: Array
+    chartId: {
+      type: String,
+      default: 'bar-chart'
+    },
+    datasetIdKey: {
+      type: String,
+      default: 'label'
+    },
+    width: {
+      type: Number,
+      default: 400
+    },
+    height: {
+      type: Number,
+      default: 400
+    },
+    cssClasses: {
+      default: '',
+      type: String
+    },
+    styles: {
+      type: Object,
+      default: () => {}
+    },
+    plugins: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
     return {
-      eventData: []
-    };
+      eventData: [],
+      chartData: {
+        labels: [],
+        datasets: [ { label: ['Number Of Attendees'], data: [] } ]
+      },
+      chartOptions: {
+        responsive: true
+      }
+    }
   },
   mounted(){
     let apiURL = import.meta.env.VITE_ROOT_API + `/dashboard/getbydate`;
     axios.get(apiURL).then((resp) => {
       this.eventData = resp.data;
+      this.chartData.labels = this.eventData.map( e => e.eventName );
+      this.chartData.datasets[0].data = (this.eventData.map( e => e.attendees ));
+
     });
   },
-  await new Chart(this.$refs.myChart, {
-      type: 'bar',
-      data: {
-        labels: this.label,
-        datasets: [
-        {
-            label: 'CASES',
-            backgroundColor: 'rgba(144,238,144 , 0.9 )',
-            data: this.chartData,
-        }
-        ]
-      },
-      options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-    }
-    }
-    }),
-    methods: {
+  methods: {
     formattedDate(datetimeDB) {
       return DateTime.fromISO(datetimeDB).plus({ days: 1 }).toLocaleString();
     },
   },
-
-  };
-
+}
 </script>
