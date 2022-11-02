@@ -106,12 +106,14 @@ export default {
     },
     handleClientDelete() {
     let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/delete/${this.id}`;
-    axios.delete(apiURL, this.client).then(() => {
-      alert("Delete has been saved.");
-      this.$router.back().catch((error) => {
-        console.log(error);
-      });
-    });
+    if (window.confirm("Do you really want to delete?")) {
+      axios.delete(apiURL, this.client).then(() => {
+
+        alert("Delete has been saved.");
+        this.$router.back().catch((error) => {
+          console.log(error);
+        });
+    })};
     },
     addToEvent() {
       this.eventsChosen.forEach((event) => {
@@ -341,7 +343,7 @@ export default {
               class="bg-red-700 text-white rounded mr-3"
             >Update Client</button>
             <button
-              @click="handleClientDelete"
+              @click.prevent="handleClientDelete"
               type="submit"
               class="bg-red-700 text-white rounded"
             >Delete Client</button>

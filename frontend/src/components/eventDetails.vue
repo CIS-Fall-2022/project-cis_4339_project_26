@@ -337,12 +337,13 @@ export default {
     handleEventDelete() {
       this.event.services = this.checkedServices;
       let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/delete/${this.id}`;
-      axios.delete(apiURL, this.event).then(() => {
-        alert("Delete has been performed.");
-        this.$router.back().catch((error) => {
-          console.log(error);
+      if (window.confirm("Do you really want to delete?")) {
+        axios.delete(apiURL, this.event).then(() => {
+          alert("Delete has been performed.");
+          this.$router.back().catch((error) => {
+            console.log(error);
         });
-      });
+      })};
     },
     editClient(clientID) {
       this.$router.push({ name: "updateclient", params: { id: clientID } });
