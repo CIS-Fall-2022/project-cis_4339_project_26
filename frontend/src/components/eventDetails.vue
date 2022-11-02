@@ -197,7 +197,7 @@
                class="bg-red-700 text-white rounded mr-3"
              >Update Event</button>
              <button
-              @click="handleEventDelete"
+              @click.prevent="handleEventDelete"
               type="submit"
               class="bg-red-700 text-white rounded"
              >Delete Event</button>
