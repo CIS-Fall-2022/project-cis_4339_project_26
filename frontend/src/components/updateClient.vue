@@ -115,27 +115,27 @@ export default {
         });
     })};
     },
-    addToEvent() {
-      this.eventsChosen.forEach((event) => {
-        let apiURL =
-          import.meta.env.VITE_ROOT_API + `/eventdata/addAttendee/` + event._id;
-        axios.put(apiURL, { attendee: this.$route.params.id }).then(() => {
-          this.clientEvents = [];
-          axios
-            .get(
-              import.meta.env.VITE_ROOT_API +
-                `/eventdata/client/${this.$route.params.id}`
-            )
-            .then((resp) => {
-              let data = resp.data;
+    addToEvent(){
+      this.eventsChosen.forEach((event) =>{
+        let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/${event._id}`;
+        
+        if (event.attendees.includes(this.id)){
+          //https://www.w3schools.com/jsref/met_win_alert.asp
+          alert("Client already in event");
+        } else {
+          alert("Client added to event");
+          //https://stackoverflow.com/questions/3715047/how-to-reload-a-page-using-javascript
+          window.location.reload();
+          event.attendees.push(this.id);
+          axios.put(apiURL, event).then(() => {
+            let data = resp.data;
               for (let i = 0; i < data.length; i++) {
-                this.clientEvents.push({
+               this.clientEvents.push({
                   eventName: data[i].eventName,
-                });
+               });
               }
-            });
-        });
-      });
+            }); 
+        }});
     },
   },
   validations() {
