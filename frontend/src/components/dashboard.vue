@@ -28,7 +28,7 @@
       </div>
     </div>
   </main>
-
+  <br>
   <Bar
     :chart-options="chartOptions"
     :chart-data="chartData"
@@ -94,7 +94,12 @@ export default {
       
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            ticks: { precision: 0 }
+          }
+        }
       }
     }
   },
@@ -104,7 +109,6 @@ export default {
       this.eventData = resp.data;
       this.chartData.labels = this.eventData.map( e => e.eventName );
       this.chartData.datasets[0].data = (this.eventData.map( e => e.attendees ));
-
     });
   },
   methods: {
