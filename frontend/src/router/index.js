@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
-        path: '/dashboardPage',
+        path: '/',
         name: 'dashboard',
         props: true,
         component: () => import('../components/dashboardPage.vue')
