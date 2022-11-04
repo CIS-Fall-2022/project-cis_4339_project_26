@@ -118,14 +118,13 @@ export default {
     addToEvent(){
       this.eventsChosen.forEach((event) =>{
         let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/${event._id}`;
-        
+        //https://www.w3schools.com/jsref/jsref_includes_array.asp
         if (event.attendees.includes(this.id)){
-          //https://www.w3schools.com/jsref/met_win_alert.asp
           alert("Client already in event");
         } else {
           alert("Client added to event");
           //https://stackoverflow.com/questions/3715047/how-to-reload-a-page-using-javascript
-          window.location.reload();
+          location.reload();
           event.attendees.push(this.id);
           axios.put(apiURL, event).then(() => {
             let data = resp.data;
