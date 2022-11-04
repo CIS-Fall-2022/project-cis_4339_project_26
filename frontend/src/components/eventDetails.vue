@@ -313,7 +313,7 @@ export default {
                 attendeeID: this.attendeeIDs[i],
                 attendeeFirstName: data.firstName,
                 attendeeLastName: data.lastName,
-                attendeeCity: data.address.city,
+                attendeeCity: data.address[0].city,
                 attendeePhoneNumber: data.phoneNumbers[0].primaryPhone,
               });
             });
