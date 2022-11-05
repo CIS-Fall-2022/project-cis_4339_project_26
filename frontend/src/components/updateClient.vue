@@ -122,8 +122,7 @@ export default {
           //https://www.w3schools.com/jsref/jsref_includes_array.asp
           if (event.attendees.includes(this.id)){
           alert("Client already in event");
-        } else {
-          alert("Client added to event");
+        } else {         
           //https://stackoverflow.com/questions/3715047/how-to-reload-a-page-using-javascript
           location.reload();
           axios.put(apiURL, { attendee: this.$route.params.id }).then(() => {
@@ -137,7 +136,7 @@ export default {
               let data = resp.data;
               for (let i = 0; i < data.length; i++) {
                 this.clientEvents.push({
-                  eventName: data[i].eventName,
+                  eventName: data[i].eventName
                 });
               }
             });

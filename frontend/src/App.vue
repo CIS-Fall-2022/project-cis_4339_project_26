@@ -1,6 +1,6 @@
 <template>
   <main class="flex flex-row">
-    <div id="_container" class="h-screen">
+    <div id="_container" class="min-h-screen">
       <header class="w-full">
         <section class="text-center">
           <img class="m-auto" src="@\assets\DanPersona.svg" />
