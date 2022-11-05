@@ -396,6 +396,7 @@ export default {
               v-model="eventsChosen"
               :options="eventData"
               :multiple="true"
+              :track-by="id"
               label="eventName"
             ></VueMultiselect>
             <div class="flex justify-between">
