@@ -97,7 +97,9 @@ export default {
         maintainAspectRatio: false,
         scales: {
           y: {
-            ticks: { precision: 0 }
+            ticks: { precision: 0},
+            // https://www.chartjs.org/docs/latest/samples/scales/linear-min-max-suggested.html
+            suggestedMax: 5
           }
         }
       }
