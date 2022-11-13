@@ -1,7 +1,8 @@
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, alpha, numeric } from "@vuelidate/validators";
+import { required, email, alpha, numeric, helpers } from "@vuelidate/validators";
 import axios from "axios";
+
 export default {
   setup() {
     return { v$: useVuelidate({ $autoDirty: true }) };
@@ -83,7 +84,9 @@ export default {
         },
         phoneNumbers: [
           {
-            primaryPhone: { required, numeric },
+            primaryPhone: { required, numeric, UniquePhoneNumber: helpers.withMessage('Phone Number in System',
+            let findclientAPI = import.meta.env.VITE_ROOT_API + `/primarydata/search/?phoneNumbers.primaryPhone=${value}&searchBy=number`;
+            ) },
           },
         ],
       },
