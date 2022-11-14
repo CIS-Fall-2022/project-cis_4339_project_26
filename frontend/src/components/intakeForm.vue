@@ -1,7 +1,23 @@
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, alpha, numeric } from "@vuelidate/validators";
+import { required, email, alpha, numeric, helpers } from "@vuelidate/validators";
 import axios from "axios";
+
+const UniquePhoneNumber = (value) => {
+    if (value.length == 10) {
+      let number;
+      let findclientAPI = import.meta.env.VITE_ROOT_API + `/primarydata/search/?phoneNumbers.primaryPhone=${value}&searchBy=number`;
+      axios.get(findclientAPI).then((resp) => {
+        number == resp.data.phoneNumbers[0].primaryPhone;
+      }); 
+      if (number == value) {
+        return false
+      }
+      return false
+    }
+  return true
+};
+
 export default {
   setup() {
     return { v$: useVuelidate({ $autoDirty: true }) };
@@ -83,7 +99,8 @@ export default {
         },
         phoneNumbers: [
           {
-            primaryPhone: { required, numeric },
+            primaryPhone: { required, numeric, UniquePhoneNumber: helpers.withMessage('Phone Number in System', UniquePhoneNumber) 
+            },
           },
         ],
       },
