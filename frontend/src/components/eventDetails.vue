@@ -334,6 +334,7 @@ export default {
         });
       });
     },
+    //hard delete with a confirmation window
     handleEventDelete() {
       this.event.services = this.checkedServices;
       let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/delete/${this.id}`;

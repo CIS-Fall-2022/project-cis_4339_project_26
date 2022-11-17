@@ -104,6 +104,7 @@ export default {
         });
       });
     },
+    //hard delete with a confirmation window
     handleClientDelete() {
     let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/delete/${this.id}`;
     if (window.confirm("Do you really want to delete?")) {
@@ -115,15 +116,18 @@ export default {
         });
     })};
     },
+    //Error handling to let the client know that they are already in the attendees list for an event they are trying to add themselves to
     addToEvent() {
       this.eventsChosen.forEach((event) => {
         let apiURL =
           import.meta.env.VITE_ROOT_API + `/eventdata/addAttendee/` + event._id;
           //https://www.w3schools.com/jsref/jsref_includes_array.asp
+          //.includes to check if the atendees id is in the array
           if (event.attendees.includes(this.id)){
           alert("Client already in event");
         } else {         
           //https://stackoverflow.com/questions/3715047/how-to-reload-a-page-using-javascript
+          //reloads the page
           location.reload();
           axios.put(apiURL, { attendee: this.$route.params.id }).then(() => {
           this.clientEvents = [];
