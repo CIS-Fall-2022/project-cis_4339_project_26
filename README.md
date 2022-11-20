@@ -17,6 +17,6 @@ cd frontend
 Follow instructions in frontend README
 
 # Cloud Deployment
-Database Link: 'mongodb+srv://Admin:CIS4339@atlascluster.nftbill.mongodb.net/GlobalPlatform'
-API Link: <https://cis4339-group26-eventorganizer.herokuapp.com/>
-App Link: To be contiune...
+- Database Link: 'mongodb+srv://Admin:CIS4339@atlascluster.nftbill.mongodb.net/GlobalPlatform'
+- API Link: <https://cis4339-group26-eventorganizer.herokuapp.com/>
+- App Link: To be contiune...
